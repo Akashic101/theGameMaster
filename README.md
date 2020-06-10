@@ -1,6 +1,6 @@
 # 
 
-[![GitHub issues](https://img.shields.io/github/issues/Akashic101/theGameMaster)](https://github.com/Akashic101/theGameMaster/issues)  [![GitHub license](https://img.shields.io/github/license/Akashic101/theGameMaster)](https://github.com/Akashic101/theGameMaster/blob/master/LICENSE) ![GitHub package.json version](https://img.shields.io/github/package-json/v/Akashic101/theGameMaster) ![GitHub repo size](https://img.shields.io/github/repo-size/Akashic101/theGameMaster?color=blueviolet)
+[![GitHub issues](https://img.shields.io/github/issues/Akashic101/theGameMaster)](https://github.com/Akashic101/theGameMaster/issues)  [![GitHub license](https://img.shields.io/github/license/Akashic101/theGameMaster)](https://github.com/Akashic101/theGameMaster/blob/master/LICENSE) ![GitHub package.json version](https://img.shields.io/github/package-json/v/Akashic101/theGameMaster)
 
 A Discord-bot for [PirateLaserBeam](https://www.twitch.tv/PirateLaserBeam/) and [Full Send Racing](https://steamcommunity.com/groups/FullSendRacing)
 
