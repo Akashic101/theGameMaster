@@ -1,0 +1,22 @@
+{
+  "name": "RacingBot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "cheerio-tableparser": "^1.0.1",
+    "discord.js": "^12.2.0",
+    "dotenv": "^8.2.0",
+    "got": "^11.3.0",
+    "puppeteer": "^3.3.0",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.5"
+  }
+}
