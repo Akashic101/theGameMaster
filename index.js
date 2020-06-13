@@ -8,6 +8,8 @@ const token = process.env.DISCORD_TOKEN;
 
 const prefix = '!';
 
+var trackCarLink = "http://cars2-stats-steam.wmdportal.com/index.php/leaderboard?track=1876749797&vehicle=3581682802";
+
 client.once('ready', () => {
   console.log('Ready!');
   client.user.setPresence({
@@ -29,7 +31,7 @@ client.on('message', async message => {
       var racerArray = [];
       var timeArray = [];
 
-      request("http://cars2-stats-steam.wmdportal.com/index.php/leaderboard?track=1876749797&vehicle=3581682802", function(error, response, body) {
+      request(trackCarLink, function(error, response, body) {
         if(error) {
           console.log("Error: " + error);
         }
@@ -48,7 +50,7 @@ client.on('message', async message => {
 
       const timeEmbed = new Discord.MessageEmbed()
       .setColor('#0099ff')
-      .setURL('http://cars2-stats-steam.wmdportal.com/index.php/leaderboard?track=1876749797&vehicle=3581682802')
+      .setURL(trackCarLink)
       .setTitle('Hot-Lap-Challenge')
       .setTimestamp()
       for(var i = 0; i < racerArray.length; i++) {
@@ -62,12 +64,18 @@ client.on('message', async message => {
 
     break;
 
+    case 'newChallenge' : 
+
+    trackCarLink = args[1];
+    message.channel.send('The new Hotlap-Challenge can be found here: ' + trackCarLink);
+    break;
+
     case 'top' :
 
       var racerArray = [];
       var timeArray = [];
 
-      request("http://cars2-stats-steam.wmdportal.com/index.php/leaderboard?track=1876749797&vehicle=3581682802", function(error, response, body) {
+      request(trackCarLink, function(error, response, body) {
         if(error) {
           console.log("Error: " + error);
         }
@@ -86,7 +94,7 @@ client.on('message', async message => {
 
       const top10Embed = new Discord.MessageEmbed()
       .setColor('#0099ff')
-      .setURL('http://cars2-stats-steam.wmdportal.com/index.php/leaderboard?track=1876749797&vehicle=3581682802')
+      .setURL(trackCarLink)
       .setTitle('Hot-Lap-Challenge')
       .setTimestamp()
       for(var i = 0; i < args[1]; i++) {
