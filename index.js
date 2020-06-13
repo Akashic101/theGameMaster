@@ -9,7 +9,7 @@ const token = process.env.DISCORD_TOKEN;
 
 const prefix = '!';
 
-var trackCarLink = "http://cars2-stats-steam.wmdportal.com/index.php/leaderboard?track=";
+var trackCarLink = "http://cars2-stats-steam.wmdportal.com/index.php/leaderboard?track=1876749797&vehicle=3581682802";
 
 const trackListSeq = new Sequelize('database', 'user', 'password', {
 	host: 'localhost',
