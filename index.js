@@ -3,14 +3,57 @@ var cheerio = require('cheerio');
 require('dotenv').config();
 const Discord = require('discord.js');
 const client = new Discord.Client();
+const Sequelize = require('sequelize');
 
 const token = process.env.DISCORD_TOKEN;
 
 const prefix = '!';
 
-var trackCarLink = "http://cars2-stats-steam.wmdportal.com/index.php/leaderboard?track=1876749797&vehicle=3581682802";
+var trackCarLink = "http://cars2-stats-steam.wmdportal.com/index.php/leaderboard?track=";
+
+const trackListSeq = new Sequelize('database', 'user', 'password', {
+	host: 'localhost',
+	dialect: 'sqlite',
+	logging: false,
+	storage: 'trackList.sqlite',
+});
+
+const trackList = trackListSeq.define('trackList', {
+  id: {
+    type: Sequelize.BIGINT,
+    primaryKey: true,
+  },
+  name: {
+    type: Sequelize.STRING 
+  },
+  used: {
+    type: Sequelize.INTEGER
+  }
+});
+
+const carListSeq = new Sequelize('database', 'user', 'password', {
+	host: 'localhost',
+	dialect: 'sqlite',
+	logging: false,
+	storage: 'carList.sqlite',
+});
+
+const carList = carListSeq.define('carList', {
+  id: {
+    type: Sequelize.BIGINT,
+    primaryKey: true,
+  },
+  name: {
+    type: Sequelize.STRING 
+  },
+  used: {
+    type: Sequelize.INTEGER
+  }
+});
 
 client.once('ready', () => {
+  trackList.sync();
+  carList.sync();
   console.log('Ready!');
   client.user.setPresence({
     activity: {
@@ -26,6 +69,7 @@ client.on('message', async message => {
   let args = message.content.substring(prefix.length).split(" ");
 
   switch (args[0]) {
+
     case 'time' :
 
       var racerArray = [];
@@ -61,14 +105,22 @@ client.on('message', async message => {
       }
       message.channel.send(timeEmbed);
     });
-
     break;
 
-    case 'newChallenge' : 
+    case 'randomRace' :
 
-    trackCarLink = args[1];
-    message.channel.send('The new Hotlap-Challenge can be found here: ' + trackCarLink);
-    break;
+      try {
+        const carMatch = await carList.findOne({ order: Sequelize.literal('random()') })
+        const trackMatch = await trackList.findOne({ order: Sequelize.literal('random()') })
+        if(carMatch) {
+          return message.channel.send('Your random race is on the ' + trackMatch.name + " Track with the car " + carMatch.name)
+        }
+        else {
+            return message.channel.send('error');
+        }
+    } catch (e) {
+        message.channel.send("error: " + e);
+}
 
     case 'top' :
 
