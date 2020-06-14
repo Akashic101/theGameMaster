@@ -796,6 +796,9 @@ const trackListSeq = new Sequelize('database', 'user', 'password', {
 });
 
 const trackList = trackListSeq.define('trackList', {
+
+  timestamps: false,
+
   id: {
     type: Sequelize.BIGINT,
     primaryKey: true,
@@ -816,6 +819,9 @@ const carListSeq = new Sequelize('database', 'user', 'password', {
 });
 
 const carList = carListSeq.define('carList', {
+
+  timestamps: false,
+
   id: {
     type: Sequelize.BIGINT,
     primaryKey: true,
