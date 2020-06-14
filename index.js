@@ -144,19 +144,17 @@ client.on('message', async message => {
 
       const fullSend = /\[FS\]/;
 
-      const top10Embed = new Discord.MessageEmbed()
+      const topEmbed = new Discord.MessageEmbed()
       .setColor('#0099ff')
       .setURL(trackCarLink)
       .setTitle('Hot-Lap-Challenge')
       .setTimestamp()
       for(var i = 0; i < args[1]; i++) {
-          top10Embed.addFields(
+          topEmbed.addFields(
             { name: racerArray[i], value: timeArray[i] }); 
       }
-      message.channel.send(top10Embed);
+      return message.channel.send(topEmbed);
     });
-
-    break;
   }
 });
 
