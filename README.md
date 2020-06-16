@@ -12,6 +12,12 @@ A Discord-bot for [Project Cars 2](https://www.projectcarsgame.com/two/) and [Pi
 
 The main feature of the bot is the hot-lap-challenge. This challenge consists of one car and one track which will be driven for a week to get the highest position on the leaderbord in Time-Trial (TT). Other features include the ability to decide a random race with a random car/track.
 
+Current commands are:
+
+* `!time` Gets every time in the top 25 of every driver who is in the [FS]-Racing-Team
+* `!top X` Gets the top X time of the leaderboard. The limit is 25 since embedMessages on Discord can only have 25 fields
+* `!randomRace` Returns a random track with a random car to race on
+
 ## How to install
 
 First you need to download [Node.js](https://nodejs.org/en/) and install it. After that go into the directory you want to install theGameMaster in and enter  
