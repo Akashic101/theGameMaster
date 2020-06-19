@@ -35,7 +35,7 @@ Right now there exists a bug which creates the database and does not fill it wit
 ___
 
 After that, create a file called `.env` in the root-directory of the bot. In there write
-`DISCORD_TOKEN = 'Your token here'
+`DISCORD_TOKEN = 'Your token here'`
 
 You can get the token by creating your own Discord-Application [here](https://discord.com/developers/applications). There simply go to the "Bot"-tab on the left side, click on "Click to Reveal Token" and copy the text
 
