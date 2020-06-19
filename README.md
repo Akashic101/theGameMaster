@@ -45,7 +45,7 @@ When that is done, launch the bot with
 If you want to automatically keep the bot alive forever you can use [pm2](https://pm2.keymetrics.io/). After you installed it, run  
 `pm2 index.js --name theGameMaster --watch`
 
-With this command, the bot is daemoninzed and will automatically restart incase it crashed. You can monitor it with `pm2 status` or `pm2 monit` for a more in-depth breakdown
+With this command, the bot is daemoninzed and will automatically restart incase it crashes or recieves an update. You can monitor it with `pm2 status` or `pm2 monit` for a more in-depth breakdown
 
 ## TO DO
 
