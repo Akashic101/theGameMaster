@@ -49,4 +49,5 @@ With this command, the bot is daemoninzed and will automatically restart incase 
 
 ## TO DO
 
-* Right now the link to the leaderboard is hard-coded and needs to be changed manually. This should be automated with `!changeTrack Link`
+* Right now the link to the leaderboard is hard-coded and needs to be changed manually. This should be automated with `!changeTrack Link`. This feature could also include an image of the new track and/or car
+* The embedMessage does not include info about the track nor the car. Using a description displaying the missing info should help
