@@ -96,6 +96,7 @@ client.on('message', async message => {
       .setColor('#0099ff')
       .setURL(trackCarLink)
       .setTitle('Hot-Lap-Challenge')
+      .setDescription(`The current hot-lap-challenge is with the **Honda Civic Coupé GRC** on **California Highway Full**`)
       .setTimestamp()
       for(var i = 0; i < racerArray.length; i++) {
         if(fullSend.exec(racerArray[i])) {
@@ -148,6 +149,7 @@ client.on('message', async message => {
       .setColor('#0099ff')
       .setURL(trackCarLink)
       .setTitle('Hot-Lap-Challenge')
+      .setDescription(`The current hot-lap-challenge is with the **Honda Civic Coupé GRC** on **California Highway Full**`)
       .setTimestamp()
       for(var i = 0; i < args[1]; i++) {
           topEmbed.addFields(
