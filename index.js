@@ -64,7 +64,7 @@ client.once('ready', () => {
 });
 
 client.on('message', async message => {
-  if (message.author.bot) return;
+  if (!message.content.startsWith(prefix) || message.author.bot) return;
 
   let args = message.content.substring(prefix.length).split(" ");
 
