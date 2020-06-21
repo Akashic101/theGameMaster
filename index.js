@@ -9,7 +9,7 @@ const token = process.env.DISCORD_TOKEN;
 
 const prefix = '!';
 
-var trackCarLink = 'http://cars2-stats-steam.wmdportal.com/index.php/leaderboard?track=2701023129&vehicle=951815226';
+var trackCarLink = 'http://cars2-stats-steam.wmdportal.com/index.php/leaderboard?track=1641471184&vehicle=2091910841';
 
 const trackListSeq = new Sequelize('database', 'user', 'password', {
 	host: 'localhost',
@@ -149,7 +149,7 @@ client.on('message', async message => {
       .setColor('#0099ff')
       .setURL(trackCarLink)
       .setTitle('Hot-Lap-Challenge')
-      .setDescription(`The current hot-lap-challenge is with the **Honda Civic Coupé GRC** on **California Highway Full**`)
+      .setDescription(`The current hot-lap-challenge is with the **Ginetta G55 GT4** on **Silverstone GP**`)
       .setTimestamp()
       for(var i = 0; i < args[1]; i++) {
           topEmbed.addFields(
