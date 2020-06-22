@@ -1,5 +1,11 @@
 # theGameMaster
 
+[![GitHub issues](https://img.shields.io/github/issues/Akashic101/theGameMaster)](https://github.com/Akashic101/theGameMaster/issues) 
+[![GitHub license](https://img.shields.io/github/license/Akashic101/theGameMaster)](https://github.com/Akashic101/theGameMaster/blob/master/LICENSE) 
+![GitHub package.json version](https://img.shields.io/github/package-json/v/Akashic101/theGameMaster) 
+![GitHub repo size](https://img.shields.io/github/repo-size/Akashic101/theGameMaster?color=blueviolet) 
+![GitHub last commit](https://img.shields.io/github/last-commit/Akashic101/theGameMaster) 
+
 A Discord-bot for [Project Cars 2](https://www.projectcarsgame.com/two/) and [PirateLaserBeam](https://www.twitch.tv/piratelaserbeam) using Node-JS
 
 ## Table of Content
