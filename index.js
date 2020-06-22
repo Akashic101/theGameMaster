@@ -163,7 +163,7 @@ client.on('message', async message => {
     case 'updateInfo' :
       car = args[1].replace(/_/g, " ")
       track = args[2].replace(/_/g, " ")
-    break;
+      return message.channel.send('The new Hot-Lap-Challenge is with the  ' + car + " on " + track)
   }
 });
 
