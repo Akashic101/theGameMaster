@@ -7,7 +7,7 @@ const Sequelize = require('sequelize');
 
 const token = process.env.DISCORD_TOKEN;
 
-const prefix = '!';
+const prefix = '.';
 
 var trackCarLink = 'http://cars2-stats-steam.wmdportal.com/index.php/leaderboard?track=1641471184&vehicle=2091910841';
 var car;
