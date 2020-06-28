@@ -123,47 +123,46 @@ client.on('message', async message => {
         }
     } catch (e) {
         message.channel.send("error: " + e);
-}
+  }
 
-    case 'top' :
+  case 'top' :
 
-      var racerArray = [];
-      var timeArray = [];
+    var racerArray = [];
+    var timeArray = [];
 
-      request(trackCarLink, function(error, response, body) {
-        if(error) {
-          console.log("Error: " + error);
-        }
-      
-        var $ = cheerio.load(body);
-
-        var counter = 0;
-      
-        $('div.leaderboard > table > tbody > tr > td > table > tbody >').each(function( index ) {
-          racerArray[counter] = $(this).find('td.user').text().trim();
-          timeArray[counter] = $(this).find('td.time').text().trim();
-          counter++;
-        });
-
-      const fullSend = /\[FS\]/;
-
-      const topEmbed = new Discord.MessageEmbed()
-      .setColor('#0099ff')
-      .setURL(trackCarLink)
-      .setTitle('Hot-Lap-Challenge')
-      .setDescription('The current Hot-Lap-Challenge is with the ' + car + " on " + track)
-      .setTimestamp()
-      for(var i = 0; i < args[1]; i++) {
-          topEmbed.addFields(
-            { name: racerArray[i], value: timeArray[i] }); 
+    request(trackCarLink, function(error, response, body) {
+      if(error) {
+        console.log("Error: " + error);
       }
-      return message.channel.send(topEmbed);
+      
+    var $ = cheerio.load(body);
+
+    var counter = 0;
+      
+    $('div.leaderboard > table > tbody > tr > td > table > tbody >').each(function( index ) {
+      racerArray[counter] = $(this).find('td.user').text().trim();
+      timeArray[counter] = $(this).find('td.time').text().trim();
+      counter++;
     });
 
-    case 'updateInfo' :
-      car = args[1].replace(/_/g, " ")
-      track = args[2].replace(/_/g, " ")
-      return message.channel.send('The new Hot-Lap-Challenge is with the ' + car + " on " + track)
+    const topEmbed = new Discord.MessageEmbed()
+    .setColor('#0099ff')
+    .setURL(trackCarLink)
+    .setTitle('Hot-Lap-Challenge')
+    .setDescription('The current Hot-Lap-Challenge is with the **' + car + "** on **" + track + "**")
+    .setTimestamp()
+    for(var i = 0; i < args[1]; i++) {
+      topEmbed.addFields(
+        { name: racerArray[i], value: timeArray[i] }); 
+    }
+    message.channel.send(topEmbed);
+    break;
+  });
+
+  case 'updateInfo' :
+    car = args[1].replace(/_/g, " ")
+    track = args[2].replace(/_/g, " ")
+    .setDescription('The current Hot-Lap-Challenge is with the **' + car + "** on **" + track + "**")
   }
 });
 
