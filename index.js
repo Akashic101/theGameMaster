@@ -98,7 +98,7 @@ client.on('message', async message => {
       .setColor('#0099ff')
       .setURL(trackCarLink)
       .setTitle('Hot-Lap-Challenge')
-      .setDescription('The current Hot-Lap-Challenge is with the ' + car + " on " + track)
+      .setDescription('The current Hot-Lap-Challenge is with the **' + car + "** on **" + track + "**")
       .setTimestamp()
       for(var i = 0; i < racerArray.length; i++) {
         if(fullSend.exec(racerArray[i])) {
@@ -113,10 +113,14 @@ client.on('message', async message => {
     case 'randomRace' :
 
       try {
+        console.log("Step 1")
         const carMatch = await carList.findOne({ order: Sequelize.literal('random()') })
+        console.log("Step 2")
         const trackMatch = await trackList.findOne({ order: Sequelize.literal('random()') })
+        console.log("Step 3")
+        message.channel.send(`Your random race is on the ${trackMatch.name} with the ${carMatch.name}`)
         if(carMatch) {
-          return message.channel.send('Your random race is on the ' + trackMatch.name + " Track with the car " + carMatch.name)
+          console.log("Step 4")
         }
         else {
             return message.channel.send('error');
@@ -124,45 +128,46 @@ client.on('message', async message => {
     } catch (e) {
         message.channel.send("error: " + e);
   }
+  break;
 
-  case 'top' :
+    case 'updateInfo' :
+      track = args[1].replace(/_/g, " ")
+      car = args[2].replace(/_/g, " ")
+      return message.channel.send('The new Hot-Lap-Challenge is with the **' + car + "** on **" + track + "**")
 
-    var racerArray = [];
-    var timeArray = [];
+      case 'top' :
 
-    request(trackCarLink, function(error, response, body) {
-      if(error) {
-        console.log("Error: " + error);
-      }
-      
-    var $ = cheerio.load(body);
-
-    var counter = 0;
-      
-    $('div.leaderboard > table > tbody > tr > td > table > tbody >').each(function( index ) {
-      racerArray[counter] = $(this).find('td.user').text().trim();
-      timeArray[counter] = $(this).find('td.time').text().trim();
-      counter++;
-    });
-
-    const topEmbed = new Discord.MessageEmbed()
-    .setColor('#0099ff')
-    .setURL(trackCarLink)
-    .setTitle('Hot-Lap-Challenge')
-    .setDescription('The current Hot-Lap-Challenge is with the **' + car + "** on **" + track + "**")
-    .setTimestamp()
-    for(var i = 0; i < args[1]; i++) {
-      topEmbed.addFields(
-        { name: racerArray[i], value: timeArray[i] }); 
-    }
-    message.channel.send(topEmbed);
+        var racerArray = [];
+        var timeArray = [];
+  
+        request(trackCarLink, function(error, response, body) {
+          if(error) {
+            console.log("Error: " + error);
+          }
+        
+        var $ = cheerio.load(body);
+  
+        var counter = 0;
+        
+        $('div.leaderboard > table > tbody > tr > td > table > tbody >').each(function( index ) {
+          racerArray[counter] = $(this).find('td.user').text().trim();
+          timeArray[counter] = $(this).find('td.time').text().trim();
+          counter++;
+        });
+  
+        const topEmbed = new Discord.MessageEmbed()
+        .setColor('#0099ff')
+        .setURL(trackCarLink)
+        .setTitle('Hot-Lap-Challenge')
+        .setDescription('The current Hot-Lap-Challenge is with the **' + car + "** on **" + track + "**")
+        .setTimestamp()
+        for(var i = 0; i < args[1]; i++) {
+          topEmbed.addFields(
+            { name: racerArray[i], value: timeArray[i] }); 
+        }
+        return message.channel.send(topEmbed);
+      });
     break;
-  });
-
-  case 'updateInfo' :
-    car = args[1].replace(/_/g, " ")
-    track = args[2].replace(/_/g, " ")
-    .setDescription('The current Hot-Lap-Challenge is with the **' + car + "** on **" + track + "**")
   }
 });
 
