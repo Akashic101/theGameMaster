@@ -98,7 +98,7 @@ client.on('message', async message => {
       .setColor('#0099ff')
       .setURL(trackCarLink)
       .setTitle('Hot-Lap-Challenge')
-      .setDescription(`The current hot-lap-challenge is with the **${car}** on **${track}**`)
+      .setDescription('The current Hot-Lap-Challenge is with the ' + car + " on " + track)
       .setTimestamp()
       for(var i = 0; i < racerArray.length; i++) {
         if(fullSend.exec(racerArray[i])) {
@@ -151,7 +151,7 @@ client.on('message', async message => {
       .setColor('#0099ff')
       .setURL(trackCarLink)
       .setTitle('Hot-Lap-Challenge')
-      .setDescription(`The current hot-lap-challenge is with the **Ginetta G55 GT4** on **Silverstone GP**`)
+      .setDescription('The current Hot-Lap-Challenge is with the ' + car + " on " + track)
       .setTimestamp()
       for(var i = 0; i < args[1]; i++) {
           topEmbed.addFields(
@@ -163,7 +163,7 @@ client.on('message', async message => {
     case 'updateInfo' :
       car = args[1].replace(/_/g, " ")
       track = args[2].replace(/_/g, " ")
-      return message.channel.send('The new Hot-Lap-Challenge is with the  ' + car + " on " + track)
+      return message.channel.send('The new Hot-Lap-Challenge is with the ' + car + " on " + track)
   }
 });
 
