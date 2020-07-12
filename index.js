@@ -125,7 +125,7 @@ client.on('message', async message => {
 
       trackCarLink = args[1]
 
-      const myURL = new URL(args[1])
+      const myURL = new URL(trackCarLink)
       const trackID = myURL.searchParams.get('track')
       const carID = myURL.searchParams.get('vehicle')
 
@@ -161,7 +161,7 @@ client.on('message', async message => {
         if(carMatch && trackMatch) {
           const randomRaceEmbed = new Discord.MessageEmbed()
             .setColor('#ec4536')
-            .setTitle('random Race')
+            .setTitle('Random Race')
             .setURL(`http://cars2-stats-steam.wmdportal.com/index.php/leaderboard?track=${trackMatch.id}&vehicle=${carMatch.id}`)
             .setDescription(`The random race is on **${trackMatch.name}** and **${carMatch.name}**`)
             .setThumbnail(carMatch.link)
@@ -173,37 +173,32 @@ client.on('message', async message => {
         else {
           message.channel.send("There was an error. Please recheck if your input was correct. If you think something is broken please open an issue on https://www.github.com/Akashic101/theGameMaster");
         }
-    } catch (e) {
+      } catch (e) {
         message.channel.send("error: " + e);
-  }
-  break;
+      }
+    break;
 
-    case 'updateInfo' :
-      track = args[1].replace(/_/g, " ")
-      car = args[2].replace(/_/g, " ")
-      return message.channel.send('The new Hot-Lap-Challenge is with the **' + car + "** on **" + track + "**")
+    case 'top' :
 
-      case 'top' :
-
-        var racerArray = [];
-        var timeArray = [];
+      var racerArray = [];
+      var timeArray = [];
   
-        request(trackCarLink, function(error, response, body) {
-          if(error) {
-            console.log("Error: " + error);
-          }
+      request(trackCarLink, function(error, response, body) {
+        if(error) {
+          console.log("Error: " + error);
+        }
         
-        var $ = cheerio.load(body);
+      var $ = cheerio.load(body);
   
-        var counter = 0;
+      var counter = 0;
         
-        $('div.leaderboard > table > tbody > tr > td > table > tbody >').each(function( index ) {
-          racerArray[counter] = $(this).find('td.user').text().trim();
-          timeArray[counter] = $(this).find('td.time').text().trim();
-          counter++;
-        });
+      $('div.leaderboard > table > tbody > tr > td > table > tbody >').each(function( index ) {
+        racerArray[counter] = $(this).find('td.user').text().trim();
+        timeArray[counter] = $(this).find('td.time').text().trim();
+        counter++;
+      });
   
-        const topEmbed = new Discord.MessageEmbed()
+      const topEmbed = new Discord.MessageEmbed()
         .setColor('#0099ff')
         .setURL(trackCarLink)
         .setTitle('Hot-Lap-Challenge')
