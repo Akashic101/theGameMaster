@@ -104,19 +104,25 @@ client.on('message', async message => {
 
       const fullSend = /\[FS\]/;
 
-      const timeEmbed = new Discord.MessageEmbed()
-      .setColor('#0099ff')
-      .setURL(trackCarLink)
-      .setTitle('Hot-Lap-Challenge')
-      .setDescription('The current Hot-Lap-Challenge is with the **' + car + "** on **" + track + "**")
-      .setTimestamp()
-      for(var i = 0; i < racerArray.length; i++) {
-        if(fullSend.exec(racerArray[i])) {
-          timeEmbed.addFields(
-            { name: racerArray[i], value: timeArray[i] }); 
-        }
+        try {
+
+          const timeEmbed = new Discord.MessageEmbed()
+            .setColor('#0099ff')
+            .setURL(trackCarLink)
+            .setTitle('Hot-Lap-Challenge')
+            .setDescription('The current Hot-Lap-Challenge is with the **' + car + "** on **" + track + "**")
+            .setTimestamp()
+            for(var i = 0; i < racerArray.length; i++) {
+              if(fullSend.exec(racerArray[i])) {
+               timeEmbed.addFields(
+                { name: racerArray[i], value: timeArray[i] }); 
+              }
+            }
+          message.channel.send(timeEmbed);
+        } catch (e) {
+          console.log("error: " + e);
       }
-      message.channel.send(timeEmbed);
+      
     });
     break;
 
@@ -125,7 +131,7 @@ client.on('message', async message => {
 
       trackCarLink = args[1]
 
-      const myURL = new URL(trackCarLink)
+      const myURL = new URL(args[1])
       const trackID = myURL.searchParams.get('track')
       const carID = myURL.searchParams.get('vehicle')
 
@@ -134,6 +140,10 @@ client.on('message', async message => {
         const carMatch = await carList.findOne({where: {id: carID}});
 
         if(carMatch && trackMatch) {
+
+          car = carMatch.name
+          track = trackMatch.name
+
           const hotLapChallengeEmbed = new Discord.MessageEmbed()
             .setColor('#0099ff')
             .setTitle('Hot-Lap-Challenge')
