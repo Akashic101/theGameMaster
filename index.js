@@ -4,6 +4,7 @@ require('dotenv').config();
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const Sequelize = require('sequelize');
+const url = require('url');
 
 const token = process.env.DISCORD_TOKEN;
 
@@ -21,12 +22,18 @@ const trackListSeq = new Sequelize('database', 'user', 'password', {
 });
 
 const trackList = trackListSeq.define('trackList', {
+
+  timestamps: false,
+
   id: {
     type: Sequelize.BIGINT,
     primaryKey: true,
   },
   name: {
     type: Sequelize.STRING 
+  },
+  link: {
+    type: Sequelize.STRING
   },
   used: {
     type: Sequelize.INTEGER
@@ -48,6 +55,9 @@ const carList = carListSeq.define('carList', {
   name: {
     type: Sequelize.STRING 
   },
+  link: {
+    type: Sequelize.STRING 
+  },
   used: {
     type: Sequelize.INTEGER
   }
@@ -56,13 +66,13 @@ const carList = carListSeq.define('carList', {
 client.once('ready', () => {
   trackList.sync();
   carList.sync();
-  console.log('Ready!');
   client.user.setPresence({
     activity: {
-        name: '!time' },
+        name: '.time' },
         status: 'idle',
         url: 'https://www.github/Akashic101/theGameMaster'})
     .catch(console.error);
+    console.log('Ready!');
 });
 
 client.on('message', async message => {
@@ -110,20 +120,58 @@ client.on('message', async message => {
     });
     break;
 
+    case 'updateHLC' :
+      if(args.length != 2) {return}
+
+      trackCarLink = args[1]
+
+      const myURL = new URL(args[1])
+      const trackID = myURL.searchParams.get('track')
+      const carID = myURL.searchParams.get('vehicle')
+
+      try {
+        const trackMatch = await trackList.findOne({where: {id: trackID}});
+        const carMatch = await carList.findOne({where: {id: carID}});
+
+        if(carMatch && trackMatch) {
+          const hotLapChallengeEmbed = new Discord.MessageEmbed()
+            .setColor('#0099ff')
+            .setTitle('Hot-Lap-Challenge')
+            .setURL(args[1])
+            .setDescription(`The new Hot-Lap-Challenge is on **${trackMatch.name}** and **${carMatch.name}**`)
+            .setThumbnail(carMatch.link)
+            .setImage(trackMatch.link)
+            .setTimestamp()
+            .setFooter('theGameMaster', 'https://i.imgur.com/U16E2rZ.png');
+          message.channel.send(hotLapChallengeEmbed);
+        }
+        else {
+          message.channel.send("There was an error. Please recheck if your input was correct. If you think something is broken please open an issue on https://www.github.com/Akashic101/theGameMaster");
+        }
+      } catch (e) {
+        console.log("error: " + e);
+    }
+    break;
+
     case 'randomRace' :
 
       try {
-        console.log("Step 1")
         const carMatch = await carList.findOne({ order: Sequelize.literal('random()') })
-        console.log("Step 2")
         const trackMatch = await trackList.findOne({ order: Sequelize.literal('random()') })
-        console.log("Step 3")
-        message.channel.send(`Your random race is on the ${trackMatch.name} with the ${carMatch.name}`)
-        if(carMatch) {
-          console.log("Step 4")
+        if(carMatch && trackMatch) {
+          const randomRaceEmbed = new Discord.MessageEmbed()
+            .setColor('#ec4536')
+            .setTitle('random Race')
+            .setURL(`http://cars2-stats-steam.wmdportal.com/index.php/leaderboard?track=${trackMatch.id}&vehicle=${carMatch.id}`)
+            .setDescription(`The random race is on **${trackMatch.name}** and **${carMatch.name}**`)
+            .setThumbnail(carMatch.link)
+            .setImage(trackMatch.link)
+            .setTimestamp()
+            .setFooter('theGameMaster', 'https://i.imgur.com/U16E2rZ.png');
+          message.channel.send(randomRaceEmbed);
         }
         else {
-            return message.channel.send('error');
+          message.channel.send("There was an error. Please recheck if your input was correct. If you think something is broken please open an issue on https://www.github.com/Akashic101/theGameMaster");
         }
     } catch (e) {
         message.channel.send("error: " + e);
