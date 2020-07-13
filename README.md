@@ -42,8 +42,9 @@ ___
 
 After that, create a file called `.env` in the root-directory of the bot. In there write
 `DISCORD_TOKEN = 'Your token here'`
+`HLC_LINK=_'link here'`
 
-You can get the token by creating your own Discord-Application [here](https://discord.com/developers/applications). There simply go to the "Bot"-tab on the left side, click on "Click to Reveal Token" and copy the text
+You can get the token by creating your own Discord-Application [here](https://discord.com/developers/applications). There simply go to the "Bot"-tab on the left side, click on "Click to Reveal Token" and copy the text. You can get the HLC_Link from http://cars2-stats-steam.wmdportal.com/
 
 When that is done, launch the bot with  
 `node .` or `node index.js`
