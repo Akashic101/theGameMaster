@@ -54,6 +54,4 @@ If you want to automatically keep the bot alive forever you can use [pm2](https:
 With this command, the bot is daemoninzed and will automatically restart incase it crashes or recieves an update. You can monitor it with `pm2 status` or `pm2 monit` for a more in-depth breakdown
 
 ## TO DO
-
-* Right now the link to the leaderboard is hard-coded and needs to be changed manually. This should be automated with `!changeTrack Link`. This feature could also include an image of the new track and/or car
-* The embedMessage does not include info about the track nor the car. Using a description displaying the missing info should help
+Right now no new features need to be added
