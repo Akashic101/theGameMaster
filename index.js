@@ -10,7 +10,7 @@ const token = process.env.DISCORD_TOKEN;
 
 const prefix = '.';
 
-var trackCarLink = 'http://cars2-stats-steam.wmdportal.com/index.php/leaderboard?track=904625875&vehicle=809291220';
+var HLCLink = process.env.HLC_LINK
 var car;
 var track;
 
@@ -87,7 +87,7 @@ client.on('message', async message => {
       var racerArray = [];
       var timeArray = [];
 
-      request(trackCarLink, function(error, response, body) {
+      request(HLCLink, function(error, response, body) {
         if(error) {
           console.log("Error: " + error);
         }
@@ -108,7 +108,7 @@ client.on('message', async message => {
 
           const timeEmbed = new Discord.MessageEmbed()
             .setColor('#0099ff')
-            .setURL(trackCarLink)
+            .setURL(HLCLink)
             .setTitle('Hot-Lap-Challenge')
             .setDescription('The current Hot-Lap-Challenge is with the **' + car + "** on **" + track + "**")
             .setTimestamp()
@@ -131,7 +131,7 @@ client.on('message', async message => {
 
       if(args.length != 2) {return}
 
-      trackCarLink = args[1]
+      process.env.HLC_LINK = args[1]
 
       const myURL = new URL(args[1])
       const trackID = myURL.searchParams.get('track')
@@ -149,7 +149,7 @@ client.on('message', async message => {
           const hotLapChallengeEmbed = new Discord.MessageEmbed()
             .setColor('#0099ff')
             .setTitle('Hot-Lap-Challenge')
-            .setURL(args[1])
+            .setURL(process.env.HLC_LINK)
             .setDescription(`The new Hot-Lap-Challenge is on **${trackMatch.name}** and **${carMatch.name}**`)
             .setThumbnail(carMatch.link)
             .setImage(trackMatch.link)
@@ -195,7 +195,7 @@ client.on('message', async message => {
       var racerArray = [];
       var timeArray = [];
   
-      request(trackCarLink, function(error, response, body) {
+      request(process.env.HLC_LINK, function(error, response, body) {
         if(error) {
           console.log("Error: " + error);
         }
@@ -212,7 +212,7 @@ client.on('message', async message => {
   
       const topEmbed = new Discord.MessageEmbed()
         .setColor('#0099ff')
-        .setURL(trackCarLink)
+        .setURL(process.env.HLC_LINK)
         .setTitle('Hot-Lap-Challenge')
         .setDescription('The current Hot-Lap-Challenge is with the **' + car + "** on **" + track + "**")
         .setTimestamp()
