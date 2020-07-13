@@ -127,6 +127,7 @@ client.on('message', async message => {
     break;
 
     case 'updateHLC' :
+
       if(args.length != 2) {return}
 
       trackCarLink = args[1]
@@ -140,10 +141,6 @@ client.on('message', async message => {
         const carMatch = await carList.findOne({where: {id: carID}});
 
         if(carMatch && trackMatch) {
-
-          car = carMatch.name
-          track = trackMatch.name
-
           const hotLapChallengeEmbed = new Discord.MessageEmbed()
             .setColor('#0099ff')
             .setTitle('Hot-Lap-Challenge')
