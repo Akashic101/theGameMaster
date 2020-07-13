@@ -112,6 +112,7 @@ client.on('message', async message => {
             .setTitle('Hot-Lap-Challenge')
             .setDescription('The current Hot-Lap-Challenge is with the **' + car + "** on **" + track + "**")
             .setTimestamp()
+            .setFooter('theGameMaster', 'https://i.imgur.com/U16E2rZ.png')
             for(var i = 0; i < racerArray.length; i++) {
               if(fullSend.exec(racerArray[i])) {
                timeEmbed.addFields(
@@ -215,6 +216,7 @@ client.on('message', async message => {
         .setTitle('Hot-Lap-Challenge')
         .setDescription('The current Hot-Lap-Challenge is with the **' + car + "** on **" + track + "**")
         .setTimestamp()
+        .setFooter('theGameMaster', 'https://i.imgur.com/U16E2rZ.png')
         for(var i = 0; i < args[1]; i++) {
           topEmbed.addFields(
             { name: racerArray[i], value: timeArray[i] }); 
