@@ -11,8 +11,8 @@ const token = process.env.DISCORD_TOKEN;
 const prefix = '.';
 
 var HLCLink = process.env.HLC_LINK
-var car;
-var track;
+var car = process.env.car
+var track = process.env.track
 
 const trackListSeq = new Sequelize('database', 'user', 'password', {
 	host: 'localhost',
@@ -87,7 +87,7 @@ client.on('message', async message => {
       var racerArray = [];
       var timeArray = [];
 
-      request(HLCLink, function(error, response, body) {
+      request(process.env.HLC_LINK, function(error, response, body) {
         if(error) {
           console.log("Error: " + error);
         }
