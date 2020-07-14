@@ -11,8 +11,6 @@ const token = process.env.DISCORD_TOKEN;
 const prefix = '.';
 
 var HLCLink = process.env.HLC_LINK
-var car = process.env.CAR
-var track = process.env.TRACK
 
 const trackListSeq = new Sequelize('database', 'user', 'password', {
 	host: 'localhost',
@@ -214,7 +212,7 @@ client.on('message', async message => {
         .setColor('#0099ff')
         .setURL(process.env.HLC_LINK)
         .setTitle('Hot-Lap-Challenge')
-        .setDescription('The current Hot-Lap-Challenge is with the **' + car + "** on **" + track + "**")
+        .setDescription('The current Hot-Lap-Challenge is with the **' + process.env.CAR + "** on **" + process.env.TRACK + "**")
         .setTimestamp()
         .setFooter('theGameMaster', 'https://i.imgur.com/U16E2rZ.png')
         for(var i = 0; i < args[1]; i++) {
