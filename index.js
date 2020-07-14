@@ -11,8 +11,8 @@ const token = process.env.DISCORD_TOKEN;
 const prefix = '.';
 
 var HLCLink = process.env.HLC_LINK
-var car = process.env.car
-var track = process.env.track
+var car = process.env.CAR
+var track = process.env.TRACK
 
 const trackListSeq = new Sequelize('database', 'user', 'password', {
 	host: 'localhost',
@@ -143,8 +143,8 @@ client.on('message', async message => {
 
         if(carMatch && trackMatch) {
 
-          car = carMatch.name
-          track = trackMatch.name
+          process.env.CAR = carMatch.name
+          process.env.TRACK = trackMatch.name
 
           const hotLapChallengeEmbed = new Discord.MessageEmbed()
             .setColor('#0099ff')
