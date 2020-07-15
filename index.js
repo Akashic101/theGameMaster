@@ -108,7 +108,7 @@ client.on('message', async message => {
             .setColor('#0099ff')
             .setURL(HLCLink)
             .setTitle('Hot-Lap-Challenge')
-            .setDescription('The current Hot-Lap-Challenge is with the **' + process.env.CAR + "** on **" + process.env.CAR + "**")
+            .setDescription('The current Hot-Lap-Challenge is with the **' + process.env.CAR + "** on **" + process.env.TRACK + "**")
             .setTimestamp()
             .setFooter('theGameMaster', 'https://i.imgur.com/U16E2rZ.png')
             for(var i = 0; i < racerArray.length; i++) {
