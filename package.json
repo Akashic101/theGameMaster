@@ -1,6 +1,6 @@
 {
-  "name": "theGamemaster",
-  "version": "2.1.0",
+  "name": "thegamemaster",
+  "version": "3.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
