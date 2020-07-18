@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const Discord = require('discord.js');
+var pjson = require('../package.json');
 
 const trackListSeq = new Sequelize('database', 'user', 'password', {
 	host: 'localhost',

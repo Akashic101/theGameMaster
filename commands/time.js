@@ -2,6 +2,7 @@ require('dotenv').config();
 const Discord = require('discord.js');
 var request = require('request');
 var cheerio = require('cheerio');
+var pjson = require('../package.json');
 
 module.exports = {
 	name: 'time',
