@@ -10,6 +10,10 @@ module.exports = {
     execute(message, args) {
         var racerArray = [];
         var timeArray = [];
+        var setupArray = [];
+        var inputArray = [];
+        var cameraArray = [];
+        var assistArray = [];
         var timestampArray = [];
 
         request(process.env.HLC_LINK, function (error, response, body) {
@@ -21,9 +25,18 @@ module.exports = {
             $('div.leaderboard > table > tbody > tr > td > table > tbody >').each(function (index) {
                 racerArray[counter] = $(this).find('td.user').text().trim();
                 timeArray[counter] = $(this).find('td.time').text().trim();
+                setupArray[counter] = $(this).find('td.assists').find('img').eq(0).attr('title');
+                inputArray[counter] = $(this).find('td.assists').find('img').eq(1).attr('title');
+                cameraArray[counter] = $(this).find('td.assists').find('img').eq(2).attr('title');
+                assistArray[counter] = $(this).find('td.assists').find('img').eq(3).attr('title');
                 timestampArray[counter] = $(this).find('td.timestamp').text().trim();
                 counter++;
             });
+
+            console.log(setupArray[0])
+            console.log(inputArray[0])
+            console.log(cameraArray[0])
+            console.log(assistArray[0])
 
             const fullSend = /\[FS\]/;
 
@@ -43,6 +56,11 @@ module.exports = {
                             value: timeArray[i],
                             inline: true
                         }, {
+                            name: "Assists",
+                            value: setupArray[i] + " " + inputArray[i] + " " + cameraArray[i],
+                            //value: (matchImage(setupArray[i]) + " " + matchImage(inputArray[i]) + " " + matchImage(cameraArray[i])),
+                            inline: true
+                        }, {
                             name: "Timestamp",
                             value: timestampArray[i],
                             inline: true
@@ -56,3 +74,26 @@ module.exports = {
         });
     },
 };
+
+function matchImage(input) {
+    switch (input) {
+        case 'Setup: Custom':
+            return client.emojis.cache.find(emoji => emoji.name === "custom");
+            break;
+        case 'Controller: Wheel':
+            return client.emojis.cache.find(emoji => emoji.name === "wheel");
+            break;
+        case 'Controller: Gamepad':
+            return client.emojis.cache.find(emoji => emoji.name === "gamepad");
+            break;
+        case 'Controller: Keyboard':
+            return client.emojis.cache.find(emoji => emoji.name === "keybaord");
+            break;
+        case 'Camera: External':
+            return client.emojis.cache.find(emoji => emoji.name === "external");
+            break;
+        case 'Controller: Wheel':
+            return client.emojis.cache.find(emoji => emoji.name === "wheel");
+            break;
+    }
+}
