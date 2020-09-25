@@ -33,11 +33,6 @@ module.exports = {
                 counter++;
             });
 
-            console.log(setupArray[0])
-            console.log(inputArray[0])
-            console.log(cameraArray[0])
-            console.log(assistArray[0])
-
             const fullSend = /\[FS\]/;
 
             try {
@@ -57,7 +52,7 @@ module.exports = {
                             inline: true
                         }, {
                             name: "Assists",
-                            value: setupArray[i] + " " + inputArray[i] + " " + cameraArray[i],
+                            value: setupArray[i] + "\n" + inputArray[i] + "\n" + cameraArray[i] + "\n" + assistArray[i],
                             //value: (matchImage(setupArray[i]) + " " + matchImage(inputArray[i]) + " " + matchImage(cameraArray[i])),
                             inline: true
                         }, {
