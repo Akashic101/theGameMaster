@@ -7,7 +7,7 @@ var pjson = require('../package.json');
 module.exports = {
     name: 'time',
     description: 'Send the time of the current Hot-Lap-Challenge of the Full-Send-Team',
-    execute(message, args) {
+    execute(client, message, args) {
         var racerArray = [];
         var timeArray = [];
         var setupArray = [];
@@ -52,8 +52,7 @@ module.exports = {
                             inline: true
                         }, {
                             name: "Assists",
-                            value: setupArray[i] + "\n" + inputArray[i] + "\n" + cameraArray[i] + "\n" + assistArray[i],
-                            //value: (matchImage(setupArray[i]) + " " + matchImage(inputArray[i]) + " " + matchImage(cameraArray[i])),
+                            value: (matchImage(setupArray[i]) + " " + matchImage(inputArray[i]) + " " + matchImage(cameraArray[i])),
                             inline: true
                         }, {
                             name: "Timestamp",
@@ -73,22 +72,18 @@ module.exports = {
 function matchImage(input) {
     switch (input) {
         case 'Setup: Custom':
-            return client.emojis.cache.find(emoji => emoji.name === "custom");
-            break;
+            return "<:custom:759553891037216788>";
+        case 'Setup: Default':
+            return "<:default:759553906564399144>";
         case 'Controller: Wheel':
-            return client.emojis.cache.find(emoji => emoji.name === "wheel");
-            break;
+            return "<:wheel:759553956854235145>";
         case 'Controller: Gamepad':
-            return client.emojis.cache.find(emoji => emoji.name === "gamepad");
-            break;
+            return "<:gamepad:759553926566903808>";
         case 'Controller: Keyboard':
-            return client.emojis.cache.find(emoji => emoji.name === "keybaord");
-            break;
+            return "<:keyboard:759553941548957707>";
         case 'Camera: External':
-            return client.emojis.cache.find(emoji => emoji.name === "external");
-            break;
-        case 'Controller: Wheel':
-            return client.emojis.cache.find(emoji => emoji.name === "wheel");
-            break;
+            return "<:external:759553920430899210>";
+        case 'Camera: in-car':
+            return "<:internal:759553932526878802>";
     }
 }

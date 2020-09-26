@@ -7,7 +7,7 @@ var pjson = require('../package.json');
 module.exports = {
     name: 'top',
     description: 'Send the top X of the current Hot-Lap-Challenge',
-    execute(message, args) {
+    execute(client, message, args) {
         var racerArray = [];
         var timeArray = [];
         var setupArray = [];
@@ -36,7 +36,7 @@ module.exports = {
                 counter++;
             });
 
-            const topEmbed = new Discord.MessageEmbed()
+            var topEmbed = new Discord.MessageEmbed()
                 .setColor('#0099ff')
                 .setURL(process.env.HLC_LINK)
                 .setTitle('Hot-Lap-Challenge')
@@ -50,8 +50,7 @@ module.exports = {
                     inline: true
                 }, {
                     name: "Assists",
-                    value: setupArray[i] + "\n" + inputArray[i] + "\n" + cameraArray[i] + "\n" + assistArray[i],
-                    //value: (matchImage(setupArray[i]) + " " + matchImage(inputArray[i]) + " " + matchImage(cameraArray[i])),
+                    value: (matchImage(setupArray[i]) + " " + matchImage(inputArray[i]) + " " + matchImage(cameraArray[i])),
                     inline: true
                 }, {
                     name: "Timestamp",
@@ -63,3 +62,22 @@ module.exports = {
         });
     },
 };
+
+function matchImage(input) {
+    switch (input) {
+        case 'Setup: Custom':
+            return "<:custom:759553891037216788>";
+        case 'Setup: Default':
+            return "<:default:759553906564399144>";
+        case 'Controller: Wheel':
+            return "<:wheel:759553956854235145>";
+        case 'Controller: Gamepad':
+            return "<:gamepad:759553926566903808>";
+        case 'Controller: Keyboard':
+            return "<:keyboard:759553941548957707>";
+        case 'Camera: External':
+            return "<:external:759553920430899210>";
+        case 'Camera: in-car':
+            return "<:internal:759553932526878802>";
+    }
+}
