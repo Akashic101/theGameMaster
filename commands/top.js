@@ -77,7 +77,7 @@ function matchImage(input) {
             return "<:keyboard:759553941548957707>";
         case 'Camera: External':
             return "<:external:759553920430899210>";
-        case 'Camera: in-car':
+        case 'Camera: In-car':
             return "<:internal:759553932526878802>";
     }
 }
