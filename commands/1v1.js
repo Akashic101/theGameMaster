@@ -69,8 +69,8 @@ module.exports = {
 
         ctx.font = `bold 30px Arial`;
         ctx.fillStyle = `white`;
-        ctx.fillText(`CARRR`, 784 * 0.5, 50);
-        ctx.fillText(`TRACKKK`, 784 * 1.25, 50);
+        ctx.fillText(`CAR`, 784 * 0.5, 50);
+        ctx.fillText(`TRACK`, 784 * 1.25, 50);
 
         try {
             var carMatch = await carList.findOne({
@@ -86,33 +86,35 @@ module.exports = {
 
                 ctx.drawImage(car, 0, 100);
                 ctx.drawImage(track, 784, 100);
+
+                var buffer = canvas.toBuffer('image/png')
+                fs.writeFileSync('./images/canvas.png', buffer)
+
+                var attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'image.png');
+
+                var challenge = new Discord.MessageEmbed()
+                    .setTitle(`**A new challenge!**`)
+                    .setDescription(`${message.author.username} has challenged ${message.mentions.users.first().username} to a 1v1-race`)
+                    .setColor(`#02E9CF`)
+                    .setTimestamp()
+                    .addFields({
+                        name: `Car`,
+                        value: carMatch.name,
+                        inline: true
+                    }, {
+                        name: `Track`,
+                        value: trackMatch.name,
+                        inline: true
+                    })
+                    .attachFiles(attachment)
+                    .setImage("attachment://image.png")
+                    .setFooter("theGameMaster V" + pjson.version, "https://i.imgur.com/BrFMwZX.png");
+                message.channel.send(challenge)
             }
 
         } catch (e) {
             console.log("error: " + e);
         }
-        var buffer = canvas.toBuffer('image/png')
-        fs.writeFileSync('./images/canvas.png', buffer)
 
-        var attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'image.png');
-
-        var challenge = new Discord.MessageEmbed()
-            .setTitle(`**A new challenge!**`)
-            .setDescription(`${message.author.username} has challenged ${message.mentions.users.first().username} to a 1v1-race`)
-            .setColor(`#02E9CF`)
-            .setTimestamp()
-            .addFields({
-                name: `Car`,
-                value: carMatch.name,
-                inline: true
-            }, {
-                name: `Track`,
-                value: trackMatch.name,
-                inline: true
-            })
-            .attachFiles(attachment)
-            .setImage("attachment://image.png")
-            .setFooter("theGameMaster V" + pjson.version, "https://i.imgur.com/BrFMwZX.png");
-        message.channel.send(challenge)
     },
 }
