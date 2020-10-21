@@ -69,8 +69,8 @@ module.exports = {
 
         ctx.font = `bold 30px Arial`;
         ctx.fillStyle = `white`;
-        ctx.fillText(`CAR`, 784 * 0.5, 50);
-        ctx.fillText(`TRACK`, 784 * 1.25, 50);
+        ctx.fillText(`CARRR`, 784 * 0.5, 50);
+        ctx.fillText(`TRACKKK`, 784 * 1.25, 50);
 
         try {
             var carMatch = await carList.findOne({
@@ -94,7 +94,6 @@ module.exports = {
         var buffer = canvas.toBuffer('image/png')
         fs.writeFileSync('./images/canvas.png', buffer)
 
-        message.channel.send('image created')
         var attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'image.png');
 
         var challenge = new Discord.MessageEmbed()
@@ -116,4 +115,4 @@ module.exports = {
             .setFooter("theGameMaster V" + pjson.version, "https://i.imgur.com/BrFMwZX.png");
         message.channel.send(challenge)
     },
-};
+}
