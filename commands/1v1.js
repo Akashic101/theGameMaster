@@ -111,8 +111,8 @@ module.exports = {
                 inline: true
             })
             .attachFiles(attachment)
-            .setImage(`attachment://image.png`)
-            .setFooter(`theGameMaster V` + pjson.version, 'https://i.imgur.com/BrFMwZX.png');
+            .setImage("attachment://image.png")
+            .setFooter("theGameMaster V" + pjson.version, "https://i.imgur.com/BrFMwZX.png");
         message.channel.send(challenge)
     },
 };
