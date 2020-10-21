@@ -64,7 +64,7 @@ module.exports = {
         const canvas = Canvas.createCanvas(784 * 2, 500);
         const ctx = canvas.getContext(`2d`);
 
-        var background = await Canvas.loadImage(`./images/canvas_background.jpg`);
+        var background = await Canvas.loadImage('./images/canvas_background.jpg');
         ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
         ctx.font = `bold 30px Arial`;
@@ -111,8 +111,8 @@ module.exports = {
                 inline: true
             })
             .attachFiles(attachment)
-            .setImage('attachment://image.png')
-            .setFooter(`theGameMaster V` + pjson.version, `https://i.imgur.com/BrFMwZX.png`);
+            .setImage(`attachment://image.png`)
+            .setFooter(`theGameMaster V` + pjson.version, 'https://i.imgur.com/BrFMwZX.png');
         message.channel.send(challenge)
     },
 };
