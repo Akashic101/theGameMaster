@@ -94,6 +94,7 @@ module.exports = {
         var buffer = canvas.toBuffer('image/png')
         fs.writeFileSync('./images/canvas.png', buffer)
 
+        message.channel.send('image created')
         var attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'image.png');
 
         var challenge = new Discord.MessageEmbed()
