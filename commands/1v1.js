@@ -100,7 +100,10 @@ module.exports = {
 
         switch (args[0]) {
             case `update`:
-                message.channel.send('What is the id of the challenge?')
+                var messageEmbed = new Discord.MessageEmbed()
+                    .setColor(`#02E9CF`)
+                    .setDescription('What is the id of the challenge?');
+                message.channel.send(messageEmbed)
                 message.channel.awaitMessages(m => m.author.id == message.author.id, {
                     max: 1,
                     time: 30000
@@ -122,7 +125,7 @@ module.exports = {
                                 message.channel.awaitMessages(m => m.author.id == message.author.id, {
                                     max: 1,
                                 }).then(async collected => {
-                                    winner = collected.first().content.substring(3, 21);
+                                    winner = collected.first().content.slice(2, -1);
 
                                     if (!(challengeMatch.driver_1 == winner || challengeMatch.driver_2 == winner)) {
                                         return message.reply(`<@${winner}> is not one of the two drivers. Therefore they cannot win the race`)
@@ -149,7 +152,10 @@ module.exports = {
                 })
                 break;
             case 'status':
-                message.channel.send('What is the id of the challenge?')
+                var messageEmbed = new Discord.MessageEmbed()
+                    .setColor(`#02E9CF`)
+                    .setDescription('What is the id of the challenge?');
+                message.channel.send(messageEmbed)
                 message.channel.awaitMessages(m => m.author.id == message.author.id, {
                     max: 1,
                 }).then(async collected => {
@@ -233,12 +239,15 @@ module.exports = {
                 })
                 break;
             case `info`:
-                message.reply(`Which driver do you want informations about? (Please @ them)`);
+                var messageEmbed = new Discord.MessageEmbed()
+                    .setColor(`#02E9CF`)
+                    .setDescription('Which driver do you want informations about? (Please @ them)');
+                message.channel.send(messageEmbed)
                 message.channel.awaitMessages(m => m.author.id == message.author.id, {
                     max: 1,
                     time: 30000
                 }).then(collected => {
-                    driver = collected.first().content.substring(3, 21);
+                    driver = collected.first().content.slice(2, -1);
                     challengeList.findAndCountAll({
                         where: {
                             winner: driver
@@ -257,12 +266,29 @@ module.exports = {
                                 }
                             ]
                         }).then(races => {
-                            return message.channel.send(`<@${driver}> won ${wins.count} out of ${races.count} races`)
+                            var infoEmbed = new Discord.MessageEmbed()
+                                .setColor(`#02E9CF`)
+                                .setDescription(`<@${driver}> won ${wins.count} out of ${races.count} races`);
+                            return message.channel.send(infoEmbed)
                         })
                     })
                 })
                 break;
             default:
+                if (!message.mentions.users.size) {
+                    var messageEmbed = new Discord.MessageEmbed()
+                        .setColor(`#02E9CF`)
+                        .setDescription(`Please mention the user with @ you want to race against`);
+                    return message.channel.send(messageEmbed)
+                }
+
+                if (message.author.id == message.mentions.users.first().id) {
+                    var messageEmbed = new Discord.MessageEmbed()
+                        .setColor(`#02E9CF`)
+                        .setDescription(`You cannot race against yourself`);
+                    return message.channel.send(messageEmbed)
+                }
+
                 try {
                     var carMatch = await carList.findOne({
                         order: Sequelize.literal('random()')
